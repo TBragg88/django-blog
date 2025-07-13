@@ -1,11 +1,9 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User # Import models to connect
 
 STATUS = ((0, "Draft"), (1, "Published"))
 
 # Create your models here.
-
-
 class Post(models.Model):
     title = models.CharField(max_length=200, unique=True)
     slug = models.SlugField(max_length=200, unique=True)
@@ -20,7 +18,7 @@ class Post(models.Model):
 
     class Meta:
         ordering = ["-created_on"]
-
+    
     def __str__(self):
         return f"{self.title} | written by {self.author}"
 
@@ -33,10 +31,10 @@ class Comment(models.Model):
     body = models.TextField()
     approved = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
-    challenge = models.SlugField(default='default-challenge')
 
     class Meta:
         ordering = ["created_on"]
 
     def __str__(self):
         return f"Comment {self.body} by {self.author}"
+        
